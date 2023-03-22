@@ -1,4 +1,5 @@
 import { Flex, Spacer ,Box ,SimpleGrid,Input,Select} from '@chakra-ui/react';
+import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
 import React from 'react'
 import {
     FormControl,
@@ -17,13 +18,10 @@ import {
         setResult(false);
     }
   return (
-    <Flex id='input' >
+    <Stack id='input' minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
    <SimpleGrid columns={1} spacing={10} >
   <Box  pt={20}  px={20}  heightp='80x' >
-  <FormControl>
-  <FormLabel>رابط البيانات</FormLabel>
-  <Input type='url'  />
-</FormControl>
+ 
   </Box>
   <Box  pt={0}  px={20}  heightp='80x' >
   <Select placeholder='القطاع'>
@@ -56,16 +54,19 @@ import {
   </Box>
 
   <Box  pt={0}  px={20}  heightp='80x' >
-  <RadioGroup onChange={setValue} value={value} >
-      <Stack direction='row'>
-        <Radio colorScheme='red'  value='1'>الاكتمال</Radio>
-        <Radio colorScheme='red' value='2'>نقاء البيانات</Radio>
-        <Radio colorScheme='red' value='3'>التوقيت</Radio>
-        <Radio colorScheme='red' value='4'>نقاء البيانات</Radio>
-        <Radio colorScheme='red' value='5'>البيانات الوصفيه</Radio>
+  <CheckboxGroup colorScheme='red' defaultValue={['naruto', 'kakashi']}>
+  <Stack spacing={[1, 5]} direction={['column', 'row']}>
+    <Checkbox value='1'>البيانات الوصفية</Checkbox>
+    <Checkbox value='2'>تنوع الصيغ</Checkbox>
+    <Checkbox value='3'>مفتوحة المصدر</Checkbox>
+    <Checkbox value='4'>التوقيت</Checkbox>
+    <Checkbox value='5'>الإكتمال</Checkbox>
+    <Checkbox value='6'>نقاء البيانات</Checkbox>
+    <Checkbox value='7'>المعالجة الإلكترونية</Checkbox>
 
-      </Stack>
-    </RadioGroup>
+  </Stack>
+</CheckboxGroup>
+
   </Box>
   <Box  pb={20}  px={20}  heightp='80x' >
   <ButtonGroup variant='outline' spacing='6'>
@@ -76,11 +77,12 @@ import {
 
  </SimpleGrid>
 
-    <Spacer />
-    {result? <Box py={20}  px={20} bg='tomato' height='80px' width={'80px'}>
+   
+    <Flex flex={1}>
+    {result? <Box py={20}  px={20} bg='tomato' height='80px' >
       result
     </Box>:null}
-   
-  </Flex>
+        </Flex>
+  </Stack>
   )
 }

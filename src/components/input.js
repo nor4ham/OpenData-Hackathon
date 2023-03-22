@@ -18,7 +18,7 @@ import {
         setResult(false);
     }
   return (
-    <Stack id='input' minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+    <Stack id='input' minH={'100vh'} direction={{ base: 'column', md: 'column' }}>
    <SimpleGrid columns={1} spacing={10} >
   <Box  pt={20}  px={20}  heightp='80x' >
  
@@ -79,7 +79,7 @@ import {
 
    
     <Flex flex={1}>
-    {result? <Box py={20}  px={20} bg='tomato' height='80px' >
+    {result? <Box py={20}  px={20} bg='tomato' height='80px' w={'full'} h={'full'} >
       result
     </Box>:null}
         </Flex>

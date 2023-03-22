@@ -45,6 +45,8 @@ export default function BasicStatistics() {
         <StatsCard title={'معيار٣'} stat={'التوقيت'} />
         <StatsCard title={'معيار٤'} stat={'نقاء البيانات'} />
         <StatsCard title={'معيار٥'} stat={'البيانات الوصفيه '} />
+        <StatsCard title={'معيار٦'} stat={'نقاء البيانات '} />
+        <StatsCard title={'معيار٧'} stat={'المعالجة الإلكترونية '} />
 
       </SimpleGrid>
     </Box>

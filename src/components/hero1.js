@@ -10,7 +10,7 @@ import {
   import img from '../img/makin.jpeg'
   export default function SplitScreen() {
     return (
-      <Stack Link to="#list" minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+      <Stack   minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
         <Flex p={8} flex={1} align={'center'} justify={'center'}>
           <Stack spacing={6} w={'full'} maxW={'lg'}>
             <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
@@ -31,11 +31,11 @@ import {
               </Text>
               <br />{' '}
               <Text color={'gray.400'} as={'span'}>
-                شعار 
+                البيانات للجميع  
               </Text>{' '}
             </Heading>
             <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-                وصف مشروع
+            يهدف مشروع فريق مكمن إلى أتمتة معايير قياس ونضج جودة مجموعات البيانات المفتوحة في المملكة العربية السعودية. نطمح بذلك إلى خلق بيئة مستدامة وفعالة لكافة الأطراف المستفيدة، من مستخدمين، صناع قرار، وباحثين.
             </Text>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
               <Button

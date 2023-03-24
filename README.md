@@ -7,17 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 In the project directory, you can run:
 
 
-### `Download the Node.js`
-https://nodejs.org/en/download
-
-### `npm install -g npm`
-download the latest version of npm
-
-
 ### `npm i`
- 
-
-
 
 ### `npm start`
 

@@ -106,7 +106,7 @@ import axios from "axios";
   </Box>
   <Box  pt={0}  px={20}   >
   <Select /* onChange={(value)=>setPublisher(value.target.value)} */  >
-  <option selected value='publisher'>الناشر</option>
+  <option selected value='publisher'>جميع الناشرين </option>
  </Select>
   </Box>
   <Box  pt={0}  px={20}  >

@@ -1,12 +1,7 @@
-import { Flex,Box ,SimpleGrid,Select} from '@chakra-ui/react';
-import { Checkbox } from '@chakra-ui/react'
+import { Flex,Box ,SimpleGrid,Select,Divider,Checkbox,Button, ButtonGroup,Stack,Center} from '@chakra-ui/react';
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-import {
-    Button, ButtonGroup
-     ,Stack
-  } from '@chakra-ui/react'
  
   import {
     Chart as ChartJS,
@@ -65,8 +60,9 @@ import {
         'Access-Control-Allow-Credentials': 'true'
       }
   };
-  let response = await axios.request(config);
-  setItems(response.data)
+  try{let response = await axios.request(config); setItems(response.data)}catch(e){console.log(e.message)}
+  
+  
     }
 
    const data = {
@@ -85,6 +81,9 @@ import {
     useEffect( () => {
       api()
       console.log("useEffect")
+      console.log(items.data)
+      console.log(items.labels)
+
      }, [checkbox])
 
 
@@ -115,7 +114,7 @@ import {
   </Box>
 
   <Box  pt={0}  px={20}  >
-  <Stack spacing={[1, 5]} direction={['column', 'column']} >
+  <SimpleGrid columns={2} spacing={10} >
 
     <Checkbox   colorScheme='red' onChange={(value)=> setCheckbox(oldArray => [...oldArray, value.target.value])}    value='1'>البيانات الوصفية</Checkbox>
     <Checkbox colorScheme='red' onChange={(value)=> setCheckbox(oldArray => [...oldArray, value.target.value])}    value='2'>تنوع الصيغ</Checkbox>
@@ -125,7 +124,7 @@ import {
     <Checkbox isDisabled colorScheme='red'onChange={(value)=> setCheckbox(oldArray => [...oldArray, value.target.value])}  value='6' >نقاء البيانات</Checkbox>
     <Checkbox isDisabled colorScheme='red'onChange={(value)=> setCheckbox(oldArray => [...oldArray, value.target.value])}  value='7'>المعالجة الإلكترونية</Checkbox>
 
-  </Stack>
+  </SimpleGrid>
 
   </Box>
   <Box  pb={20}  px={20}   >
@@ -137,14 +136,17 @@ import {
   </Box>
 
  </SimpleGrid>
- <Box  pt={0} pb={10} px={20}  heightp='80x' >
+ <Center >
+ {result? <Divider orientation='vertical' />:null}
+</Center> 
+ <Box  pt={0} pb={10} px={20}  >
  <SimpleGrid columns={2} spacing={10} >
  {result? <SimpleGrid columns={1} > 
-   <p  > النسبه الكليه لنضج وجودة البيانات  : {items.total} %  </p>
+   <p  > النسبه الكليه لنضج وجودة البيانات  : {items.length!=0? items.total:0} %  </p>
 
-   {items.labels.map((label ,index)=><p  > {label}  : {items.data[index]} % </p> )}
+   {items.length!=0?items.labels.map((label ,index)=><p  > {label}  : {items.data[index]} % </p> ):null}
   
-   </SimpleGrid> :null}
+   </SimpleGrid> :null} 
   {result? <Box py={4}  px={4} >
     <Radar  data={data} /></Box>   :null}
 

@@ -1,13 +1,11 @@
-import { Flex, Spacer ,Box ,SimpleGrid,Input,Select} from '@chakra-ui/react';
-import { Checkbox, CheckboxGroup } from '@chakra-ui/react'
+import { Flex,Box ,SimpleGrid,Select} from '@chakra-ui/react';
+import { Checkbox } from '@chakra-ui/react'
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import {
-    FormControl,
-    FormLabel,
-    Button, ButtonGroup,
-     FormHelperText,Stack,Text
+    Button, ButtonGroup
+     ,Stack
   } from '@chakra-ui/react'
  
   import {
@@ -36,19 +34,19 @@ import {
 
   export default function InputOutput() {
 
-     const [result, setResult] = React.useState(false)
-     const [save, setSave] = React.useState(true)
+     const [result, setResult] = useState(false)
+     const [save, setSave] = useState(true)
 
-    const [items, setItems] = React.useState([])
+    const [items, setItems] = useState([])
 
-    const [publisher, setPublisher] = React.useState("")
-    const [value, setValue] = React.useState("health")
+    const [value, setValue] = useState("health")
 
-    const [checkbox, setCheckbox] = React.useState([])
+    const [checkbox, setCheckbox] = useState([])
 
     function show(){
         setResult(true);
         setSave(false)
+        console.log("save")
     }
  
     function refreshPage() {
@@ -69,7 +67,6 @@ import {
   };
   let response = await axios.request(config);
   setItems(response.data)
-  console.log(response.data.data)
     }
 
    const data = {
@@ -87,20 +84,17 @@ import {
 
     useEffect( () => {
       api()
-      console.log(value)
-    }, [checkbox])
+      console.log("useEffect")
+     }, [checkbox])
 
 
  
   return (
-    <Stack id='input' minH={'100vh'} direction={{ base: 'column', md: 'column' }}>
-   <SimpleGrid columns={1} spacing={10} >
-  <Box  pt={20}  px={20}  heightp='80x' >
- 
-  </Box>
-  <Box  pt={0}  px={20}  heightp='80x' >
-  <Select placeholder='القطاع' onChange={(value)=>setValue(value.target.value)}>
-  <option value='all'>كامل القطاع </option>
+    <Flex justify={'space-between'}   id='input' minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+   <SimpleGrid columns={1}  >
+  <Box  pt={0}  px={20}   >
+  <Select onChange={(value)=>setValue(value.target.value)}>
+  <option selected  value='all'>كامل القطاع </option>
   <option value='health'>الصحه </option>
   <option value='agriculture_and_fishing'>زراعه</option>
   <option value='social_services'>خدمات اجتماعيه </option>
@@ -111,17 +105,17 @@ import {
   <option value='arab_gulf_cooperation_council_-gcc-'>مجلس التعاون لدول الخليج العربيه </option>
 </Select>
   </Box>
-  <Box  pt={0}  px={20}  heightp='80x' >
-  <Select onChange={(value)=>setPublisher(value.target.value)}  >
+  <Box  pt={0}  px={20}   >
+  <Select /* onChange={(value)=>setPublisher(value.target.value)} */  >
   <option selected value='publisher'>الناشر</option>
  </Select>
   </Box>
-  <Box  pt={0}  px={20}  heightp='3' >
+  <Box  pt={0}  px={20}  >
     اختر المعيار 
   </Box>
 
-  <Box  pt={0}  px={20}  heightp='80x' >
-  <Stack spacing={[1, 5]} direction={['column', 'row']} >
+  <Box  pt={0}  px={20}  >
+  <Stack spacing={[1, 5]} direction={['column', 'column']} >
 
     <Checkbox   colorScheme='red' onChange={(value)=> setCheckbox(oldArray => [...oldArray, value.target.value])}    value='1'>البيانات الوصفية</Checkbox>
     <Checkbox colorScheme='red' onChange={(value)=> setCheckbox(oldArray => [...oldArray, value.target.value])}    value='2'>تنوع الصيغ</Checkbox>
@@ -134,40 +128,30 @@ import {
   </Stack>
 
   </Box>
-  <Box  pb={20}  px={20}  heightp='80x' >
+  <Box  pb={20}  px={20}   >
   <ButtonGroup variant='outline' spacing='6'>
-  {save?<Button onClick={show} colorScheme='black'>Save</Button>:null} 
+  {save?<Button onClick={show} colorScheme='black'>قياس</Button>:null} 
   
-  <Button onClick={refreshPage} colorScheme='red'  >Cancel</Button>
+  <Button onClick={refreshPage} colorScheme='red'  >الغاء</Button>
 </ButtonGroup>
   </Box>
 
  </SimpleGrid>
- <Flex justify={'space-between'}  >
-  {result? <Box py={4}  px={4} >
-    <Radar  data={data} /></Box>   :null}
-  {result? <SimpleGrid columns={1} > 
+ <Box  pt={0} pb={10} px={20}  heightp='80x' >
+ <SimpleGrid columns={2} spacing={10} >
+ {result? <SimpleGrid columns={1} > 
    <p  > النسبه الكليه لنضج وجودة البيانات  : {items.total} %  </p>
 
    {items.labels.map((label ,index)=><p  > {label}  : {items.data[index]} % </p> )}
   
    </SimpleGrid> :null}
+  {result? <Box py={4}  px={4} >
+    <Radar  data={data} /></Box>   :null}
 
-<Box width={'40px'} ></Box>
- </Flex>
-{/*  <Stack   minH={'100vh'} direction={{ base: 'column', md: 'column' }}>
-        <Flex p={8} flex={1} align={'center'} justify={'center'}>
-          <Stack spacing={6} w={'full'} maxW={'lg'}>
-     {result? <Box py={20}  px={20} >
-    <Radar  data={data} />
-    <br/>
-    <Text  fontSize='4xl'> النسبه الكليه لنضج وجودة البيانات  : {items.total} ٪ </Text>
+   </SimpleGrid>
+   </Box>
 
-    </Box>: null}
-             </Stack> 
-          </Flex>         
-  </Stack> 
-    */}
-  </Stack>
+
+  </Flex>
   )
 }

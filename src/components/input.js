@@ -1,8 +1,6 @@
 import { Flex,Box ,SimpleGrid,Select,Divider,Checkbox,Button, ButtonGroup,Stack,Center} from '@chakra-ui/react';
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 
- 
   import {
     Chart as ChartJS,
     RadialLinearScale,

@@ -41,6 +41,7 @@ import axios from "axios";
     function show(){
         setResult(true);
         setSave(false)
+        api_fun()
         console.log("save")
     }
  
@@ -49,7 +50,7 @@ import axios from "axios";
     }
   
      //api 
-   async function api(){
+/*    async function api(){
     let url = "http://ec2-34-202-159-48.compute-1.amazonaws.com:5000/api/"+value+"/publisher/"+checkbox.join('')
      let config = {
       url:url,
@@ -63,8 +64,17 @@ import axios from "axios";
   try{let response = await axios.request(config); setItems(response.data)}catch(e){console.log(e.message)}
   
   
-    }
+    } */
+    async function api_fun(){
+      let url = "http://ec2-34-202-159-48.compute-1.amazonaws.com:5000/api/"+value+"/publisher/"+checkbox.join('')
 
+      fetch(url)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setItems(result)
+        })
+      }
    const data = {
     labels: items.labels,
     datasets: [
@@ -79,12 +89,9 @@ import axios from "axios";
   };
 
     useEffect( () => {
-      api()
       console.log("useEffect")
-      console.log(items.data)
-      console.log(items.labels)
-
-     }, [checkbox])
+ 
+     }, [])
 
 
  
@@ -116,7 +123,7 @@ import axios from "axios";
   <Box  pt={0}  px={20}  >
   <SimpleGrid columns={2} spacing={10} >
 
-    <Checkbox   colorScheme='red' onChange={(value)=> setCheckbox(oldArray => [...oldArray, value.target.value])}    value='1'>البيانات الوصفية</Checkbox>
+    <Checkbox  colorScheme='red' onChange={(value)=> setCheckbox(oldArray => [...oldArray, value.target.value])}    value='1'>البيانات الوصفية</Checkbox>
     <Checkbox colorScheme='red' onChange={(value)=> setCheckbox(oldArray => [...oldArray, value.target.value])}    value='2'>تنوع الصيغ</Checkbox>
     <Checkbox colorScheme='red' onChange={(value)=> setCheckbox(oldArray => [...oldArray, value.target.value])}  value='3'>مفتوحة المصدر</Checkbox>
     <Checkbox colorScheme='red'onChange={(value)=> setCheckbox(oldArray => [...oldArray, value.target.value])}   value='4'>التوقيت</Checkbox>
@@ -137,7 +144,7 @@ import axios from "axios";
 
  </SimpleGrid>
  <Center >
- {result? <Divider orientation='vertical' />:null}
+ {result? <Divider borderColor={'red'}  width={10} orientation='vertical' />:null}
 </Center> 
  <Box  pt={0} pb={10} px={20}  >
  <SimpleGrid columns={2} spacing={10} >
